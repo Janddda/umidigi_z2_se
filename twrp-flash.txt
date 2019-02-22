@@ -1,0 +1,71 @@
+Hi
+
+I was ask many times on how i made TWRP and how to get it work on Stock Roms.
+so i thought i will make a Thread for this, so here we go.
+
+1 TWRP download:
+https://1drv.ms/u/s!Am93l3qEx-D_hOdRaTHKVKjvN1M9RA
+(this is my Port from the Ulefone S3 , flashing /backup etc all works)
+
+Important:
+to get TWRP working you need to edit your fstab in your Rom , it needs to be encryptable insteed of forceencrypt..
+
+How do to this:
+well very easy , just follow this steps
+
+1. first you need root! (magsik)
+
+1. Download your Stock rom from Umidigi
+2. extract it and take out the boot.img
+3. copy the extracted boot.img to your Sdcard or Internal Storage on the Phone
+4. Download magisk manager apk from Magisk Thread and install magisk manager apk
+5. open it and choose install/ and choose boot.img
+6. give magisk your boot.img in your storage
+7. after its patched its in your downoad folder
+8. copy this patched_boot.img to your desktop on pc
+
+now we need to flash it with flashtools
+
+for this use your scatter.txt file of the stock rom you donwloaded and the patched_boot.img
+
+9. place scatter.txt and patched_boot.img into a new folder created on your desktop
+10. rename patched_boot.img to boot.img
+11. turn of the phone and start flashtools
+12. in flashtools choose the "new folder you created"
+13. press on start and after connect the phone to pc via usb..
+14. wait. done!
+now you have root!
+all this steps will take 2-3 minutes.
+
+
+1. now we need to edit the fstab file
+because its a MTK device your fstab file looks like fstab.mt6763 or simliar
+2. Download Mixplorer from XDA Thread. ( this root explorer is the best because it set permission automaticly.)
+3. open mixplorer and browse to root/system/vendor/etc/fstab.mt6763..
+4 open that file and search for ( should be line 15)
+Code:
+
+/dev/block/platform/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,quota,formattable,resize,forceencrypt=/dev/block/platform/bootdevice/by-name/metadata,
+
+5. edit the file to this
+Code:
+
+/dev/block/platform/bootdevice/by-name/userdata /data ext4 noatime,nosuid,nodev,noauto_da_alloc,errors=panic wait,check,quota,formattable,resize,encryptable=/dev/block/platform/bootdevice/by-name/userdata,
+
+6.save and turn off the phone
+
+Flash TWRP with Flashtools
+
+1. now just place the downloaded TWRP recovery to the created "new folder" on your desktop
+(where the boot.img and scatter.txt is in)
+2. start flashtools choose that folder and press on start
+3 connect phone to pc via usb ... wait until its done.
+4. congrats you have a working TWRP
+
+Because i dont own this Phone anymore i dont know the button combinations to boot direct into TWRP , but you also can use a playstore app for that , just serch for a advanced power menu in playstore..
+
+
+LINKS:
+
+Magisk: https://forum.xda-developers.com/app...mless-t3473445
+Mixplorer: https://forum.xda-developers.com/sho....php?t=1523691
